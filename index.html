@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS style link -->
+    <link rel="stylesheet" href="./src/css/style.css">
+    <!-- Bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Icon link -->
+    <link rel="icon" href="./src/assets/images/calculator.png">
+    <title>Scientific Calculator</title>
+</head>
+
+<body>
+    <div class="container" id="main-div">
+        <div class="calculator-body">
+            <!-- For displaying the expression in the input field -->
+            <div class="display">
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" id="input" placeholder="0" />
+                    </div>
+                </div>
+            </div>
+            <!-- For displaying the error message -->
+            <div class="text-center" id="errorDiv"></div>
+            <!-- Degree to Radian toggle and Fixed to Exponent(FE) button -->
+            <div class="functions">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn" value="degree" id="degree"
+                            onclick="degreeToRadian()">DEG</button>
+                        <button type="button" class="btn" value="f-e" id="f-e" onclick="fixedToExponent()">F-E</button>
+                    </div>
+                </div>
+                <!-- Memory Buttons - MC, MR, M+, M-, MS  -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn" value="mc" id="mc" onclick="memoryClearFunction()"
+                            disabled>MC</button>
+                        <button type="button" class="btn" value="mr" id="mr" onclick="memoryRecallFunction()"
+                            disabled>MR</button>
+                        <button type="button" class="btn" value="m+" id="madd" onclick="memoryAddFunction()">M+</button>
+                        <button type="button" class="btn" value="m-" onclick="memorySubtractFunction()">M-</button>
+                        <button type="button" class="btn" value="ms" onclick="memorySaveFunction()">MS</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <!-- Trigonometry dropdown - sine, cosine, tangent, cotangent, secant, cosecant -->
+                        <div class="dropdown">
+                            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="./src/assets/images/right-triangle.png" alt="Right Angle Triangle Symbol"
+                                    class="image">&nbsp;<span class="dropdown-text">Trigonometry</span>&nbsp;
+                                <small><i class="fa-solid fa-angle-down"></i></small></button>
+                            <!-- dropdown for different trigonometry functions -->
+                            <ul class="dropdown-menu">
+                                <div class="d-flex division-view">
+                                    <li>
+                                        <button class="dropdown-item" value="sin" onclick="sineFunction()">sin</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="cos"
+                                            onclick="cosineFunction()">cos</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="tan"
+                                            onclick="tangentFunction()">tan</button>
+                                    </li>
+                                </div>
+
+                                <div class="d-flex">
+                                    <li>
+                                        <button class="dropdown-item" value="cot"
+                                            onclick="cotangentFunction()">cot</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="sec"
+                                            onclick="secantFunction()">sec</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="cosec"
+                                            onclick="cosecantFunction()">cosec</button>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                        <!-- Function dropdown - floor, ceil, random, modulus -->
+                        <div class="dropdown">
+                            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="./src/assets/images/function.png" alt="Function Symbol"
+                                    class="image">&nbsp;<span class="dropdown-text">Function</span>&nbsp;
+                                <small><i class="fa-solid fa-angle-down"></i></small></button>
+                            <!-- dropdown for different function -->
+                            <ul class="dropdown-menu">
+                                <div class="d-flex division-view">
+
+                                    <li>
+                                        <button class="dropdown-item" value="floor"
+                                            onclick="floorFunction()">&#8970;x&#8971;</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="ceil"
+                                            onclick="ceilFunction()">&#8968;x&#8969;</button>
+                                    </li>
+                                </div>
+
+                                <div class="d-flex">
+                                    <li>
+                                        <button class="dropdown-item" value="rand"
+                                            onclick="randomFunction()">random</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" value="mod"
+                                            onclick="modulusFunction()">|x|</button>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 2nd toggle, pi, e, clear, remove buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button class="change" id="button-style"
+                            onclick="changeDropdown('display2','display1')">2<sup>nd</sup></button>
+                        <button type="button" class="btn" value="pi" class="pi" id="button-style"
+                            onclick="piFunction()">π</button>
+                        <button type="button" class="btn" value="euler-number" id="button-style"
+                            onclick="eulerFunction()">e</button>
+                        <button type="button" class="btn" id="button-style" onclick="clearAllFunction()">C</button>
+                        <button type="button" class="btn" value="cancel" id="button-style-red"
+                            onclick="removeOneElementFromEndFunction()"><img src="./src/assets/images/cancel.png"
+                                alt="cancel" class="image1"></button>
+                    </div>
+                </div>
+                <!-- x^2, x^3, 1/x, modulus, exponent, modulo buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="x^2" id="button-style"
+                            onclick="squareFunction()">x<sup>2</sup></button>
+                        <button type="button" class="display2" class="btn" value="x^3" id="button-style"
+                            onclick="cubeFunction()">x<sup>3</sup></button>
+                        <button type="button" class="btn" value="1/x" id="button-style"
+                            onclick="byXFunction()"><small>1/x</small></button>
+                        <button type="button" class="btn" value="|x|" id="button-style"
+                            onclick="modulusFunction1()">|x|</button>
+                        <button type="button" class="btn" value="exp" id="button-style"
+                            onclick="exponentFunction()">exp</button>
+                        <button type="button" class="btn" value="%" id="button-style"
+                            onclick="moduloFunction()">mod</button>
+                    </div>
+                </div>
+                <!-- squareRoot, cubeRoot, (, ), n!(factorial), /(divide) buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="sqrt" id="button-style"
+                            onclick="squareRootFunction()"><sup>2</sup>&radic;x</button>
+                        <button type="button" class="display2" class="btn" value="cbrt" id="button-style"
+                            onclick="cubeRootFunction()"><sup>3</sup>&radic;x</button>
+                        <button type="button" class="btn" value="(" id="button-style"
+                            onclick="displayInputValue(value)">(</button>
+                        <button type="button" class="btn" value=")" id="button-style"
+                            onclick="displayInputValue(value)">)</button>
+                        <button type="button" class="btn" value="factorial" id="button-style"
+                            onclick="factorialFunction()">n!</button>
+                        <button type="button" class="btn" value="/" id="button-style"
+                            onclick="displayInputValue(value)">&#247;</button>
+                    </div>
+                </div>
+                <!-- x^y, x^2, number-7, number-8, number-9, *(multiply) buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="^" id="button-style"
+                            onclick="xRaiseYFunction()">x<sup>y</sup></button>
+                        <button type="button" class="display2" class="btn" value="2^x" id="button-style"
+                            onclick="raiseTo2Function()">2<sup>x</sup></button>
+                        <button type="button" class="btn" value="7" id="button-design"
+                            onclick="displayInputValue(value)">7</button>
+                        <button type="button" class="btn" value="8" id="button-design"
+                            onclick="displayInputValue(value)">8</button>
+                        <button type="button" class="btn" value="9" id="button-design"
+                            onclick="displayInputValue(value)">9</button>
+                        <button type="button" class="btn" value="*" id="button-style"
+                            onclick="displayInputValue(value)">&#215;</button>
+                    </div>
+                </div>
+                <!-- 10^x, log1p, number-4, number-5, number-6, -(subtract) buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="10^x" id="button-style"
+                            onclick="raiseTo10Function()">10<sup>x</sup></button>
+                        <button type="button" class="display2" class="btn" value="log1p" id="button-style"
+                            onclick="logPlusFunction()">log1p</button>
+                        <button type="button" class="btn" value="4" id="button-design"
+                            onclick="displayInputValue(value)">4</button>
+                        <button type="button" class="btn" value="5" id="button-design"
+                            onclick="displayInputValue(value)">5</button>
+                        <button type="button" class="btn" value="6" id="button-design"
+                            onclick="displayInputValue(value)">6</button>
+                        <button type="button" class="btn" value="-" id="button-style"
+                            onclick="displayInputValue(value)">&#8722;</button>
+                    </div>
+                </div>
+                <!-- log, expm1, number-1, number-2, number-3, +(add) buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="log" id="button-style"
+                            onclick="logarithmFunction()">log</button>
+                        <button type="button" class="display2" class="btn" value="expm1" id="button-style"
+                            onclick="expMinusFunction()">expm1</button>
+                        <button type="button" class="btn" value="1" id="button-design"
+                            onclick="displayInputValue(value)">1</button>
+                        <button type="button" class="btn" value="2" id="button-design"
+                            onclick="displayInputValue(value)">2</button>
+                        <button type="button" class="btn" value="3" id="button-design"
+                            onclick="displayInputValue(value)">3</button>
+                        <button type="button" class="btn" value="+" id="button-style"
+                            onclick="displayInputValue(value)">&#43;</button>
+                    </div>
+                </div>
+                <!-- ln, e^x, sign change, number-0, .(decimal), =(equal) buttons -->
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="display1" class="btn" value="ln" id="button-style"
+                            onclick="naturalLogarithmFunction()">ln</button>
+                        <button type="button" class="display2" class="btn" value="e^x" id="button-style"
+                            onclick="eRaisexFunction()">e<sup>x</sup></button>
+                        <button type="button" class="btn" value="plus-minus" id="button-design"
+                            onclick="signChangeFunction()"><small>&#43;/&#8722;</small></button>
+                        <button type="button" class="btn" value="0" id="button-design"
+                            onclick="displayInputValue(value)">0</button>
+                        <button type="button" class="btn" value="." id="button-design"
+                            onclick="displayInputValue(value)">.</button>
+                        <button type="button" class="btn" id="button-style-green" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Script links -->
+        <script src="./dist/build/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
