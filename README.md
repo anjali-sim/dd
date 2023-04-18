@@ -88,6 +88,4 @@ Eg : If user enters an expression like 5+6-8* , then it shows Invalid Input!
 ![Screenshot from 2023-03-01 17-15-39](https://user-images.githubusercontent.com/122269010/222130570-dbe2a39e-7fa0-4d9a-97f1-ca65638ae73b.png)
 
 
-## Check Live
-https://graceful-hamster-8ab1f0.netlify.app
  
